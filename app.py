@@ -5,14 +5,14 @@ from flask import Flask, request, render_template
 app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(BASE_DIR, "data\\")
+DATA_DIR = os.path.join(BASE_DIR, "data")
 
 
 @app.route("/perform_query/")
 def perform_query(cmd1=None, value1=None, cmd2=None, value2=None, file_name=None):
 
     try:
-        file_name = DATA_DIR + request.args.get('file_name')
+        file_name = os.path.join(DATA_DIR, request.args.get('file_name'))
     except TypeError:
         return f'Не передан аргумент "file_name"', 400
 
